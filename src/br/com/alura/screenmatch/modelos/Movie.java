@@ -1,38 +1,30 @@
-public class Movie {
-    //CLASSE: a classe especifica o conteúdo de um objeto, ou seja
-    //ela é um molde para os atributos do objeto
-    //ABSTRAÇÃO: consiste em esconder os detalhes desnecessários
-    //de uma classe ou objeto, focando apenas nas características
-    //mais importãntes para sua aplicação
-    String name;
-    int releaseYear;
-    boolean includedInThePlan;
-    private int totalReviews;//private: o atributo ou método só pode ser acessado dentro da própria classe.
-    int durationInMinutes;
-    private double somaAvaliacoes; //private: o atributo ou método só pode ser acessado dentro da própria classe.
+package br.com.alura.screenmatch.modelos;
 
-    //ENCAPSULAMENTO: consiste em esconder os detalhes internos de uma classe
-    // ,protegendo seus atributos e métodos de serem acessados ou modificadoS
-    // diretamente por outras classes
-    //MÉTODOS: são funções que executam blocos de código
+import br.com.alura.screenmatch.calculos.Classificacao;
 
-    //MÉTODO ACESSOR: usadado para acesssar informação de um atributo privado
-    //na classe
-    int getTotalReviews() {
-        return totalReviews;
-    }
-    void displayTechnicalSheet(){//void = método não retorna nada
-        System.out.println("Nome do filme: " + name);
-        System.out.println("Ano de lançamento: " + releaseYear);
+public class Movie extends Titulo implements Classificacao {
+    private String director;
+
+    public Movie(String nome, int releaseYear) {//construtora
+       //em Java, um construtor é um método especial de uma classe que é utilizado para inicializar objetos dessa classe. Ele tem o mesmo nome da classe e não possui um tipo de retorno. Os construtores são chamados quando um objeto de uma classe é criado, e eles são usados para configurar o estado inicial do objeto.
+       super(nome, releaseYear);
     }
 
-    void avalia(double nota) {
-        somaAvaliacoes += nota;
-        totalReviews++;
+    public String getDirector() {
+        return director;
     }
 
-    double obterMedia() {
-        return somaAvaliacoes/totalReviews;
+    public void setDirector(String director) {
+        this.director = director;
     }
 
+    @Override
+    public int getClassificacao() {
+        return (int)obterMedia() / 2;
+    }
+
+    @Override
+    public String toString() {
+        return "Filme: " + this.getName();
+    }
 }
